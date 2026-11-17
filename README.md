@@ -23,8 +23,8 @@ Repo này **chỉ dùng để phát hành bộ cài launcher** — tải ở m�
 
 ## Cài đặt
 
-**Cần có:** Windows 10/11 64-bit · Brave Nine trên Steam (bản của bạn) và Steam đang chạy ·
-[.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) (x64; nếu thiếu, Windows sẽ báo và dẫn tới trang tải).
+**Cần có:** Windows 10/11 64-bit · Brave Nine trên Steam (bản của bạn) và Steam đang chạy. Không cần cài .NET: từ bản
+2026.11.17.1624 launcher kèm sẵn runtime (bản cũ hơn cần [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) x64).
 
 1. Tải `BraveNineRevival-Launcher-<phiên bản>.zip` ở [Releases](../../releases/latest), **giải nén cả thư mục** ra một chỗ
    cố định (ví dụ `D:\Game\BraveNineLauncher`).
@@ -63,8 +63,8 @@ This repository **only hosts launcher releases** — download from [**Releases**
 
 ## Install
 
-**Requirements:** Windows 10/11 64-bit · Brave Nine on Steam (your own copy) with Steam running ·
-[.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) (x64; Windows prompts with a download link if missing).
+**Requirements:** Windows 10/11 64-bit · Brave Nine on Steam (your own copy) with Steam running. No .NET install needed:
+since 2026.11.17.1624 the launcher ships with its own runtime (older builds need [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) x64).
 
 1. Download `BraveNineRevival-Launcher-<version>.zip` from [Releases](../../releases/latest) and **extract the whole folder**
    somewhere permanent (e.g. `D:\Game\BraveNineLauncher`).
@@ -78,3 +78,14 @@ the package for details.
 ## Third-party licenses
 
 The package includes [BepInEx](https://github.com/BepInEx/BepInEx) (LGPL-2.1) in `payload\BepInEx-dist`.
+
+## Antivirus báo nhầm / Antivirus false positives
+
+Một số phần mềm diệt virus (ví dụ Kaspersky: `PDM:Trojan.Win32.Generic`) có thể chặn launcher vì **hành vi** giống mã độc:
+cài `winhttp.dll` (cách BepInEx nạp mod) vào thư mục game, tự tải bản cập nhật và tự thay file của chính nó, và exe chưa
+được ký số. Đây là báo nhầm — mã nguồn không chứa gì độc hại. Cách xử lý: khôi phục file khỏi khu cách ly và thêm thư mục
+launcher vào danh sách loại trừ. **Đừng** chọn "khử mã độc" (sẽ xoá launcher).
+
+Some antivirus products (e.g. Kaspersky `PDM:Trojan.Win32.Generic`) may block the launcher based on **behavior**: it places
+`winhttp.dll` (how BepInEx loads mods) into the game folder, downloads and replaces its own files when updating, and the exe
+is not code-signed. This is a false positive. Restore the file from quarantine and add the launcher folder to the exclusions.
